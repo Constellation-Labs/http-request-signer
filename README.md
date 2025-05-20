@@ -1,10 +1,27 @@
 # Http Requests Signer
 
-![https://github.com/abankowski/http-request-signer/workflows/tests/badge.svg?branch=master](https://github.com/abankowski/http-request-signer/workflows/tests/badge.svg?branch=master)
+[![Release](https://github.com/Constellation-Labs/http-request-signer/actions/workflows/release.yml/badge.svg)](https://github.com/Constellation-Labs/http-request-signer/actions/workflows/release.yml)
+
+> This is a fork of [abankowski/http-request-signer](https://github.com/abankowski/http-request-signer), maintained by Constellation Network.
 
 Available implementations for http4s and akka-http are published as separate jars. Both are cross compiled for Scala 2.12 and 2.13.
 
 Current implementation is a draft. Currently only signature with RSA is provided with ease of extensibility.
+
+## Installation
+
+Add the following dependencies to your build.sbt:
+
+```scala
+// For the core module
+libraryDependencies += "io.constellationnetwork" %% "http-request-signer-core" % "0.1.0"
+
+// For http4s integration
+libraryDependencies += "io.constellationnetwork" %% "http4s-request-signer" % "0.1.0"
+
+// For Akka HTTP integration
+libraryDependencies += "io.constellationnetwork" %% "akka-http-request-signer" % "0.1.0"
+```
 
 ## Usage
 
