@@ -10,7 +10,8 @@ ThisBuild / versionScheme := Some("early-semver")
 
 ThisBuild / homepage := Some(url("https://github.com/Constellation-Labs/http-request-signer"))
 ThisBuild / licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
-ThisBuild / sonatypeCredentialHost := "central.sonatype.com"
+ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 
 ThisBuild / developers := List(
   Developer(
