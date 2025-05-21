@@ -1,0 +1,21 @@
+name: tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Java, Scala, and SBT
+        uses: olafurpg/setup-scala@v14
+        with:
+          java-version: openjdk@1.11
+
+      - name: Run tests
+        run: sbt test
