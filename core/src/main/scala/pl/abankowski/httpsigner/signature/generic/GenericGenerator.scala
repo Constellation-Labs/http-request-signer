@@ -1,8 +1,8 @@
-package pl.abankowski.httpsigner.signature.generic
+package io.constellationnetwork.httpsigner.signature.generic
 
 import java.security.{PrivateKey, Provider}
 
-import pl.abankowski.httpsigner.signature.{GenericGenerator => GenericGeneratorImpl}
+import io.constellationnetwork.httpsigner.signature.{GenericGenerator => GenericGeneratorImpl}
 
 class GenericGenerator(
   override val algorithm: String,

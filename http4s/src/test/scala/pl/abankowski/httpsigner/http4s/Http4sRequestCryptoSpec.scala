@@ -1,4 +1,4 @@
-package pl.abankowski.httpsigner.http4s
+package io.constellationnetwork.httpsigner.http4s
 
 import java.security.SecureRandom
 
@@ -7,12 +7,12 @@ import org.bouncycastle.crypto.generators.RSAKeyPairGenerator
 import org.http4s.{Headers, Method, Request, Uri}
 import org.http4s.Uri.{Authority, RegName, Scheme}
 import org.scalatest.{FunSpec, Matchers}
-import pl.abankowski.httpsigner.{
+import io.constellationnetwork.httpsigner.{
   SignatureInvalid,
   SignatureMissing,
   SignatureValid
 }
-import pl.abankowski.httpsigner.signature.rsa.Rsa
+import io.constellationnetwork.httpsigner.signature.rsa.Rsa
 
 import cats.effect.unsafe.implicits.global
 

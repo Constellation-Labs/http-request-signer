@@ -1,10 +1,10 @@
-package pl.abankowski.httpsigner
+package io.constellationnetwork.httpsigner
 
 import org.bouncycastle.util.encoders.Base64
 import org.typelevel.ci._
 
 import scala.language.higherKinds
-import pl.abankowski.httpsigner.signature.{Generator, Verifier}
+import io.constellationnetwork.httpsigner.signature.{Generator, Verifier}
 
 trait HttpCryptoConfig {
   final val signatureHeaderName = ci"Request-Signature"

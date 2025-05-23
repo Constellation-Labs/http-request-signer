@@ -1,4 +1,4 @@
-package pl.abankowski.httpsigner
+package io.constellationnetwork.httpsigner
 
 import java.security.{PrivateKey, Provider, PublicKey, Signature}
 

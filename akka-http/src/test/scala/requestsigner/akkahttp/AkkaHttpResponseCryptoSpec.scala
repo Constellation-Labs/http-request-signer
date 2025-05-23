@@ -8,13 +8,13 @@ import akka.testkit.TestKit
 import cats.effect.IO
 import org.bouncycastle.crypto.generators.RSAKeyPairGenerator
 import org.scalatest.{FunSpecLike, Matchers}
-import pl.abankowski.httpsigner.{
+import io.constellationnetwork.httpsigner.{
   SignatureInvalid,
   SignatureMissing,
   SignatureValid
 }
-import pl.abankowski.httpsigner.akkahttp.AkkaHttpResponseCrypto
-import pl.abankowski.httpsigner.signature.rsa.Rsa
+import io.constellationnetwork.httpsigner.akkahttp.AkkaHttpResponseCrypto
+import io.constellationnetwork.httpsigner.signature.rsa.Rsa
 
 import cats.effect.unsafe.implicits.global
 

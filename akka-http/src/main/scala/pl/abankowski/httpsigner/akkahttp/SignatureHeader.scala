@@ -1,7 +1,7 @@
-package pl.abankowski.httpsigner.akkahttp
+package io.constellationnetwork.httpsigner.akkahttp
 
 import akka.http.scaladsl.model.headers.{ModeledCustomHeader, ModeledCustomHeaderCompanion}
-import pl.abankowski.httpsigner.HttpCryptoConfig
+import io.constellationnetwork.httpsigner.HttpCryptoConfig
 
 import scala.util.Try
 
