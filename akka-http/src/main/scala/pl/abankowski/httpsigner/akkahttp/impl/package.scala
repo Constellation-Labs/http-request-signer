@@ -1,4 +1,4 @@
-package pl.abankowski.httpsigner.akkahttp
+package io.constellationnetwork.httpsigner.akkahttp
 
 import java.io.ByteArrayOutputStream
 
@@ -6,7 +6,7 @@ import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
 import akka.stream.Materializer
 import cats.effect.Async
 import cats.implicits._
-import pl.abankowski.httpsigner.{
+import io.constellationnetwork.httpsigner.{
   HttpCryptoConfig,
   HttpSigner,
   HttpVerifier,

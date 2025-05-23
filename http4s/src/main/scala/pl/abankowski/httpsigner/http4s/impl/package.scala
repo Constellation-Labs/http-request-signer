@@ -1,4 +1,4 @@
-package pl.abankowski.httpsigner.http4s
+package io.constellationnetwork.httpsigner.http4s
 
 import java.io.ByteArrayOutputStream
 
@@ -6,7 +6,7 @@ import cats.effect.Async
 import cats.implicits._
 import org.http4s.{Header, Headers, Request, Response}
 import org.typelevel.log4cats.Logger
-import pl.abankowski.httpsigner.{
+import io.constellationnetwork.httpsigner.{
   HttpCryptoConfig,
   HttpSigner,
   HttpVerifier,

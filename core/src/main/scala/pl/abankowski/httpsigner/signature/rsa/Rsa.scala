@@ -1,8 +1,8 @@
-package pl.abankowski.httpsigner.signature.rsa
+package io.constellationnetwork.httpsigner.signature.rsa
 
 import org.bouncycastle.crypto.params.AsymmetricKeyParameter
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair
-import pl.abankowski.httpsigner.signature.{RsaSHA512Generator, RsaSHA512Verifier}
+import io.constellationnetwork.httpsigner.signature.{RsaSHA512Generator, RsaSHA512Verifier}
 
 final class Rsa(
   override val privKey: AsymmetricKeyParameter,

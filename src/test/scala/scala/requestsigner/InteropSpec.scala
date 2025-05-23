@@ -17,10 +17,10 @@ import org.bouncycastle.crypto.generators.RSAKeyPairGenerator
 import org.http4s.{Header, Headers, Method, Request, Response, Uri}
 import org.http4s.Uri.{Authority, RegName, Scheme}
 import org.scalatest.{FunSpec, FunSpecLike, Matchers}
-import pl.abankowski.httpsigner.signature.rsa.Rsa
-import pl.abankowski.httpsigner.SignatureValid
-import pl.abankowski.httpsigner.akkahttp.{AkkaHttpRequestCrypto, AkkaHttpResponseCrypto}
-import pl.abankowski.httpsigner.http4s.{Http4SResponseCrypto, Http4sRequestCrypto}
+import io.constellationnetwork.httpsigner.signature.rsa.Rsa
+import io.constellationnetwork.httpsigner.SignatureValid
+import io.constellationnetwork.httpsigner.akkahttp.{AkkaHttpRequestCrypto, AkkaHttpResponseCrypto}
+import io.constellationnetwork.httpsigner.http4s.{Http4SResponseCrypto, Http4sRequestCrypto}
 
 import cats.effect.unsafe.implicits.global
 
