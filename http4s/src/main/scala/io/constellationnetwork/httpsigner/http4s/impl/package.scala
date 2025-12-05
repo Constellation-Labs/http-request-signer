@@ -43,7 +43,7 @@ package object impl {
           buffer
         }
       }.flatMap(content =>
-        request.body.compile.toVector.map(_.toArray).map { body =>
+        request.body.compile.to(Array).map { body =>
           content.write(body)
           content.toByteArray
         }
@@ -69,7 +69,7 @@ package object impl {
             buffer
           }
       }.flatMap { content =>
-        response.body.compile.toVector.map(_.toArray).map { body =>
+        response.body.compile.to(Array).map { body =>
           content.write(body)
           content.toByteArray
         }
@@ -81,16 +81,17 @@ package object impl {
 
     override def sign(request: Request[F]): F[Request[F]] =
       message(request).flatMap { msg =>
-        val signature = calculateSignature(msg)
-        logger
-          .debug(s"Signing request ${request.method} ${request.pathInfo} req-hash=${md5(msg)} req-sig=$signature")
-          .map(_ =>
-            request.withHeaders(
-              Headers(
-                Header.Raw(config.signatureHeaderName, signature) :: request.headers.headers
+        (F.blocking(calculateSignature(msg)) <* F.cede).flatMap { signature =>
+          logger
+            .debug(s"Signing request ${request.method} ${request.pathInfo} req-hash=${md5(msg)} req-sig=$signature")
+            .map(_ =>
+              request.withHeaders(
+                Headers(
+                  Header.Raw(config.signatureHeaderName, signature) :: request.headers.headers
+                )
               )
             )
-          )
+        }
       }
   }
 
@@ -103,18 +104,18 @@ package object impl {
       request.headers.headers
         .find(_.name.equals(config.signatureHeaderName))
         .map(signature =>
-          message(request).map { msg =>
-            val result = verifySignature(msg, signature.value)
-            logger.debug(
-              s"Verifying request ${request.method} ${request.pathInfo} req-hash=${md5(msg)} req-sig=${signature.value} result=${result}"
-            )
-            result
+          message(request).flatMap { msg =>
+            (F.blocking(verifySignature(msg, signature.value)) <* F.cede).flatMap { result =>
+              logger.debug(
+                s"Verifying request ${request.method} ${request.pathInfo} req-hash=${md5(msg)} req-sig=${signature.value} result=${result}"
+              ).as(result)
+            }
           }
         )
         .getOrElse(
           logger
             .debug(s"Verifying request ${request.method} ${request.pathInfo} failed, signature missing")
-            .map(_ => SignatureMissing)
+            .as(SignatureMissing)
         )
   }
 
@@ -125,10 +126,11 @@ package object impl {
 
     override def sign(response: Response[F]): F[Response[F]] =
       message(response).flatMap { msg =>
-        val signature = calculateSignature(msg)
-        logger
-          .debug(s"Signing response resp-sig=$signature")
-          .map(_ => response.withHeaders(response.headers.put(Header.Raw(config.signatureHeaderName, signature))))
+        (F.blocking(calculateSignature(msg)) <* F.cede).flatMap { signature =>
+          logger
+            .debug(s"Signing response resp-sig=$signature")
+            .as(response.withHeaders(response.headers.put(Header.Raw(config.signatureHeaderName, signature))))
+        }
       }
   }
 
@@ -141,16 +143,17 @@ package object impl {
       response.headers.headers
         .find(_.name.equals(config.signatureHeaderName))
         .map(signature =>
-          message(response).map { msg =>
-            val result = verifySignature(msg, signature.value)
-            logger.debug(s"Verifying response resp-hash=${md5(msg)} req-sig=${signature.value} result=${result}")
-            result
+          message(response).flatMap { msg =>
+            (F.blocking(verifySignature(msg, signature.value)) <* F.cede).flatMap { result =>
+              logger.debug(s"Verifying response resp-hash=${md5(msg)} req-sig=${signature.value} result=${result}")
+                .as(result)
+            }
           }
         )
         .getOrElse(
           logger
             .debug(s"Verifying response failed, signature missing")
-            .map(_ => SignatureMissing)
+            .as(SignatureMissing)
         )
   }
 }
