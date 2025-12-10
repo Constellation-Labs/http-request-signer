@@ -14,7 +14,7 @@ jobs:
       - name: Setup Java, Scala, and SBT
         uses: olafurpg/setup-scala@v14
         with:
-          java-version: openjdk@1.11
+          java-version: openjdk@1.17
 
       - name: Build and publish http-request-signer artifacts to Maven
         run: sbt ci-release
