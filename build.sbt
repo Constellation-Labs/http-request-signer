@@ -1,7 +1,7 @@
 name := "http-request-signer"
 
 lazy val scala212 = "2.12.10"
-lazy val scala213 = "2.13.16"
+lazy val scala213 = "2.13.18"
 lazy val supportedScalaVersions = List(scala212, scala213)
 
 ThisBuild / organization := "io.constellationnetwork"
@@ -24,11 +24,11 @@ ThisBuild / developers := List(
 lazy val versions = new {
   val akkaHttp = "10.1.9"
   val akkaStream = "2.6.0"
-  val bouncyCastle = "1.70"
+  val bouncyCastle = "1.83"
   val caseInsensitive = "1.2.0"
-  val catsCore = "2.7.0"
-  val catsEffect = "3.3.4"
-  val http4sVersion = "0.23.7"
+  val catsCore = "2.13.0"
+  val catsEffect = "3.6.3"
+  val http4sVersion = "0.23.17"
 }
 
 lazy val http4sDependencies = Seq(
@@ -58,7 +58,7 @@ lazy val core = (project in file("core"))
     name := "http-request-signer-core",
     crossScalaVersions := supportedScalaVersions,
     libraryDependencies ++= Seq(
-      "org.bouncycastle" % "bcprov-jdk15on" % versions.bouncyCastle,
+      "org.bouncycastle" % "bcprov-jdk18on" % versions.bouncyCastle,
       "org.typelevel" %% "case-insensitive" % versions.caseInsensitive
     ) ++ catsDependencies,
     licenses += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0"))
